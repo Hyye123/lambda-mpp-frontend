@@ -1,3 +1,3 @@
-# mppnet
+# lambda mpp
 
-The unminified client files for [MPPNet](https://multiplayerpiano.net).
+The unminified client files for [Lambda MPP](https://lmpp.hyye.xyz).
