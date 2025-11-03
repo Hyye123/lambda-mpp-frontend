@@ -2,27 +2,6 @@ const translation = window.i18nextify.init({
   autorun: false,
 });
 
-if (location.host === "multiplayerpiano.com") {
-  const url = new URL("https://multiplayerpiano.net/" + location.search);
-  if (localStorage.token) url.searchParams.set("token", localStorage.token);
-  location.replace(url);
-  throw new Error("Redirecting to multiplayerpiano.net");
-}
-
-if (location.host === "multiplayerpiano.net") {
-  const url = new URL(location.href);
-  const token = url.searchParams.get("token");
-  if (token) {
-    localStorage.token = token;
-
-    url.searchParams.delete("token");
-
-    location.replace(url);
-
-    throw new Error("Finalizing redirect.");
-  }
-}
-
 // 钢琴
 
 $(function() {
@@ -32,7 +11,7 @@ $(function() {
     "color:blue; font-size:20px;",
   );
   console.log(
-    "%cCheck out the source code: https://github.com/mppnet/frontend/tree/main/client\nGuide for coders and bot developers: https://docs.google.com/document/d/1OrxwdLD1l1TE8iau6ToETVmnLuLXyGBhA0VfAY1Lf14/edit?usp=sharing",
+    "%cCheck out the source code: https://github.com/Hyye123/lambda-mpp-frontend\nGuide for coders and bot developers: https://github.com/Hyye123/lambda-mpp-frontend/blob/main/bot-guide.md",
     "color:gray; font-size:12px;",
   );
 
@@ -798,7 +777,7 @@ $(function() {
   if (window.location.hostname === "localhost") {
     var soundDomain = `http://${location.host}`;
   } else {
-    var soundDomain = "https://multiplayerpiano.net";
+    var soundDomain = "https://lmpp.hyye.xyz";
   }
 
   function SoundSelector(piano) {
@@ -1144,24 +1123,6 @@ $(function() {
     if (!results) return null;
     if (!results[2]) return "";
     return decodeURIComponent(results[2].replace(/\+/g, " "));
-  }
-
-  //html/css overrides for multiplayerpiano.com
-  if (window.location.hostname === "multiplayerpiano.com") {
-    //disable autocomplete
-    $("#chat-input")[0].autocomplete = "off";
-    //add rules button
-    let aElement = document.createElement("a");
-    aElement.href =
-      "https://docs.google.com/document/d/1wQvGwQdaI8PuEjSWxKDDThVIoAlCYIxQOyfyi4o6HcM/edit?usp=sharing";
-    aElement.title = "Multiplayer Piano Rules";
-    aElement.target = "_blank";
-    let buttonElement = document.createElement("button");
-    buttonElement.style =
-      "height: 24px; font-size: 12px; background: #111; border: 1px solid #444; padding: 5px; cursor: pointer; line-height: 12px; border-radius: 2px; -webkit-border-radius: 2px; -moz-border-radius: 2px; overflow: hidden; white-space: nowrap; color: #fff; position: absolute; right: 6px; top: 0px; z-index: 20001;";
-    buttonElement.innerText = "Rules";
-    aElement.appendChild(buttonElement);
-    document.body.appendChild(aElement);
   }
 
   function getRoomNameFromURL() {
